@@ -1,55 +1,24 @@
 package ru.mirea.practice.practice10;
 
-public class PingPong {
-    public static void main(String[] args)
-    {
-        Object lock = new Object();
-        Thread ping = new Thread(new PingPongThread(lock, "Ping"));
-        Thread pong = new Thread(new PingPongThread(lock, "Pong"));
-
-        ping.start();
-        pong.start();
+public class PingPong extends Thread {
+    private boolean f;
+    public PingPong(boolean f) {
+        this.f=f;
     }
-}
-
-
-class PingPongThread implements Runnable
-{
-    private Object lock;
-    private String name;
-
-    public PingPongThread(Object lock, String name)
-    {
-        this.lock = lock;
-        this.name = name;
-    }
-
     @Override
-    public void run()
-    {
-        synchronized (lock)
-        {
-            while(true)
-            {
-                System.out.println(name);
-                try
-                {
-                    Thread.sleep(2000);
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
-                lock.notify();
-                try
-                {
-                    lock.wait(2000);
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
-            }
+    public void run() {
+        if (f) System.out.println("Ping");
+        else System.out.println("Pong");
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        while (true){
+            PingPong thread1 = new PingPong(true);
+            PingPong thread2 = new PingPong(false);
+            thread1.start();
+            PingPong.sleep(2000);
+            thread2.start();
+            PingPong.sleep(2000);
         }
     }
 }
