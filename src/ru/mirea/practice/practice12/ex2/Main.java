@@ -5,13 +5,14 @@ public class Main {
 
     public static void main(String[] args) throws StudentException {
         System.out.print("Enter the number of students: ");
-        int Kstud = in.nextInt();
+        String Kstudy = in.nextLine();
+        int Kstud = Integer.parseInt(Kstudy);
         Student st[] = new Student[Kstud];
         List<Student> stu = new ArrayList<>();
         System.out.print("Enter the full name of the students: ");
-        String name = in.nextLine();
+
         for (int i = 0; i < Kstud; i++) {
-            name = in.nextLine();
+            String name = in.nextLine();
             int id = (int) (Math.random()*200);
             int b = (int) (Math.random()*100);
             st[i] = new Student(name, id, b);
@@ -42,7 +43,7 @@ public class Main {
                     break;
                 case "3":
                     int help = find(st, Kstud);
-                    if (help != 0) {System.out.println("Student found: " + st[help]);}
+                    if (help != -1) {System.out.println("Student found: " + st[help]);}
                     else throw new StudentException("Such student is not on the list.");
             }
             System.out.print("Enter next action number: ");
@@ -57,6 +58,6 @@ public class Main {
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 }
