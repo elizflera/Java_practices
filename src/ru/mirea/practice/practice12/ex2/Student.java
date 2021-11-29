@@ -40,6 +40,6 @@ public class Student implements StudentInterface{
 
     @Override
     public String toString() {
-        return "ID: " + iDNumber + ", ФИО: " + FIO + ", Оценка: " + bal;
+        return "ID: " + iDNumber + ", Full name: " + FIO + ", Grade: " + bal;
     }
 }

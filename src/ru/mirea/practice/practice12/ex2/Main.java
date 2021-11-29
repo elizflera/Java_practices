@@ -4,11 +4,11 @@ public class Main {
     private static final Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) throws StudentException {
-        System.out.print("Введите количество студентов: ");
+        System.out.print("Enter the number of students: ");
         int Kstud = in.nextInt();
         Student st[] = new Student[Kstud];
         List<Student> stu = new ArrayList<>();
-        System.out.print("Введите ФИО студентов: ");
+        System.out.print("Enter the full name of the students: ");
         String name = in.nextLine();
         for (int i = 0; i < Kstud; i++) {
             name = in.nextLine();
@@ -18,16 +18,16 @@ public class Main {
             stu.add(new Student(name, id, b));
         }
         System.out.println("--------------------------------------------");
-        System.out.println("Для вывода списка студентов с оценками нажмите \"1\".");
-        System.out.println("Для сортировки списка студентов с оценками нажмите \"2\".");
-        System.out.println("Для поиска студента нажмите \"3\".");
-        System.out.println("Для завершения работы программы нажмите \"0\".");
+        System.out.println("To display a list of students with grades click \"1\".");
+        System.out.println("To sort the list of students with grades click\"2\".");
+        System.out.println("To search for students click \"3\".");
+        System.out.println("To close the program click \"0\".");
         System.out.println("--------------------------------------------");
         String flag = in.nextLine();
         while (!Objects.equals(flag, "0")) {
             switch (flag) {
                 case "1":
-                    System.out.println("Список студентов: ");
+                    System.out.println("List of students: ");
                     for (Student i : stu) {
                         System.out.println(i);
                     }
@@ -35,22 +35,22 @@ public class Main {
                 case "2":
                     Comparator<Student> comp = new SortingStudentsByGPA();
                     stu.sort(comp);
-                    System.out.println("Отсортированный список студентов: ");
+                    System.out.println("Sorted list of students: ");
                     for (Student i : stu) {
                         System.out.println(i);
                     }
                     break;
                 case "3":
                     int help = find(st, Kstud);
-                    if (help != 0) {System.out.println("Студент найден: " + st[help]);}
-                    else throw new StudentException("Такой студент отсутствует в списке.");
+                    if (help != 0) {System.out.println("Student found: " + st[help]);}
+                    else throw new StudentException("Such student is not on the list.");
             }
-            System.out.print("Введите номер следующего действия: ");
+            System.out.print("Enter next action number: ");
             flag = in.nextLine();
         }
     }
     public static int find(Student st[], int Kstud) {
-        System.out.print("Введите ФИО искомого студента: ");
+        System.out.print("Enter the full name of the student you are looking for: ");
         String Ffio = in.nextLine();
         for (int i = 0; i < Kstud; i++) {
             if (st[i].getFIO().equals(Ffio)) {
